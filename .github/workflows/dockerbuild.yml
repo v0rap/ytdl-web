@@ -1,9 +1,8 @@
-name: Deploy Hello World
+name: Deploy application when new version is published
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [published]
 
 jobs:
   deploy-docker-hello-world:
