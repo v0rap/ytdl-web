@@ -52,6 +52,7 @@ def generate_response(resp_dict: dict, status_code: int = 200):
 def get_media_urls(body):
     url = body.get("url")
     parsed = urlparse(url)
+    parsed.hostname = ".".join(parsed.hostname.split(".")[-2:])
     if parsed.hostname not in DOMAINS:
         logging.info(f"Invalid DOMAIN for {url=}")
         return generate_response({
