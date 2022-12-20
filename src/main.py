@@ -69,7 +69,8 @@ def get_media_urls(body):
             }, status_code=400)
 
     with YoutubeDL({"skip_download": True}) as ydl:
-        info_dict = ydl.extract_info(f"https://youtu.be/{video_id}")
+        info_dict = ydl.extract_info(f"https://youtu.be/{video_id}",
+                                     download=False)
     logging.info(f"{info_dict=}")
     return generate_response({
         "sound_url": info_dict.get("requested_formats")[1].get("url"),
