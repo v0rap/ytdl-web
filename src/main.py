@@ -74,7 +74,6 @@ def get_media_urls(body):
     return generate_response({
         "sound_url": info_dict.get("requested_formats")[1].get("url"),
         "video_url": info_dict.get("requested_formats")[0].get("url"),
-        "combined_url": info_dict.get("url")
     })
 
 
