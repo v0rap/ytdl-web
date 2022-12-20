@@ -123,7 +123,7 @@ resource "aws_lambda_function" "api_lambda" {
   image_uri     = "981644780922.dkr.ecr.eu-north-1.amazonaws.com/ytdl:${var.image_version}"
   function_name = "ytdl"
   package_type  = "Image"
-  timeout = "8"  # Seconds before the function times out and returns internal server error
+  timeout = "15"  # Seconds before the function times out and returns internal server error
   role          = aws_iam_role.iam_ytdl.arn
   
 }
