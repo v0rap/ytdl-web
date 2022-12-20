@@ -1,11 +1,11 @@
-name: Deploy application when new version is published
+name: Build and push container image when releasing new version
 
 on:
   release:
     types: [published]
 
 jobs:
-  deploy-docker-hello-world:
+  build-and-push-container-image:
     runs-on: ubuntu-latest
 
     steps:
