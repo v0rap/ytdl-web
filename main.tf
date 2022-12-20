@@ -113,6 +113,11 @@ resource "aws_iam_role" "iam_ytdl" {  # Used to only allow access to lambda for 
 EOF
 }
 
+resource "aws_iam_role_policy_attachment" "lambda_role_attach" {  # Required to provide access to write cloudwatch logs
+  role       = aws_iam_role.iam_ytdl.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
+
 
 resource "aws_lambda_function" "api_lambda" {
   image_uri     = "981644780922.dkr.ecr.eu-north-1.amazonaws.com/ytdl:${var.image_version}"
