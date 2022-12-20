@@ -40,6 +40,7 @@ EOF
 resource "aws_lambda_function" "test_lambda" {
   image_uri     = "ghcr.io/v0rap/ytdl:latest"
   function_name = "ytdl"
+  package_type = "Image"
   role          = aws_iam_role.iam_ytdl.arn
   handler       = "app.handler"
   runtime = "python3.9"
