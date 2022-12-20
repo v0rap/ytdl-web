@@ -37,7 +37,7 @@ resource "aws_iam_role" "iam_ytdl" {  # Used to only allow access to lambda for 
 EOF
 }
 
-resource "aws_lambda_function" "test_lambda" {
+resource "aws_lambda_function" "api_lambda" {
   image_uri     = "ghcr.io/v0rap/ytdl-web:latest"
   function_name = "ytdl"
   package_type = "Image"
