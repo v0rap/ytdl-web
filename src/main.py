@@ -52,8 +52,8 @@ def generate_response(resp_dict: dict, status_code: int = 200):
 def get_media_urls(body):
     url = body.get("url")
     parsed = urlparse(url)
-    parsed.hostname = ".".join(parsed.hostname.split(".")[-2:])
-    if parsed.hostname not in DOMAINS:
+    domain = ".".join(parsed.hostname.split(".")[-2:])
+    if domain not in DOMAINS:
         logging.info(f"Invalid DOMAIN for {url=}")
         return generate_response({
             "detail": (
@@ -61,7 +61,7 @@ def get_media_urls(body):
                 f"Allowed domains are: {DOMAINS.keys()}")
             }, status_code=400)
 
-    video_id = DOMAINS[parsed.hostname]["parser"](url)
+    video_id = DOMAINS[domain]["parser"](url)
 
     if not video_id_regex.fullmatch(video_id):
         return generate_response({
