@@ -27,6 +27,41 @@ resource "aws_ecr_repository" "ytdl_repo" {
   }
 }
 
+resource "aws_ecr_repository_policy" "ytdl_repo_policy" {
+  repository = aws_ecr_repository.ytdl_repo.name
+
+  policy = <<EOF
+{
+    "Version": "2008-10-17",
+    "Statement": [
+        {
+            "Sid": "new policy",
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": "arn:aws:iam::981644780922:root"
+            },
+            "Action": [
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:PutImage",
+                "ecr:InitiateLayerUpload",
+                "ecr:UploadLayerPart",
+                "ecr:CompleteLayerUpload",
+                "ecr:DescribeRepositories",
+                "ecr:GetRepositoryPolicy",
+                "ecr:ListImages",
+                "ecr:DeleteRepository",
+                "ecr:BatchDeleteImage",
+                "ecr:SetRepositoryPolicy",
+                "ecr:DeleteRepositoryPolicy"
+            ]
+        }
+    ]
+}
+EOF
+}
+
 resource "aws_iam_role" "iam_ytdl" {  # Used to only allow access to lambda for the function
   name               = "iam_ytdl"
   assume_role_policy = <<EOF
