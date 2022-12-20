@@ -1,5 +1,4 @@
 import logging
-import json
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -8,5 +7,9 @@ logger.setLevel(logging.INFO)
 def handler(event, context):
     logging.info("Function was triggered!")
     return {
-        "message": "Hello world!"
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "body": '{"message": "Hello, world!"}',
+        "statusCode": 200
     }
