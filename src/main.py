@@ -42,7 +42,10 @@ logger.setLevel(logging.DEBUG)
 def generate_response(resp_dict: dict, status_code: int = 200):
     return {
         "headers": {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Origin": "https://ytdl.se,http://127.0.0.1:5500",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
         },
         "body": json.dumps(resp_dict),
         "statusCode": status_code
