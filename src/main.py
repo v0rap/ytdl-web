@@ -70,12 +70,12 @@ def get_media_urls(body):
 
     with YoutubeDL({"skip_download": True}) as ydl:
         info_dict = ydl.extract_info(f"https://youtu.be/{video_id}")
-        logging.info(f"{info_dict=}")
-        return generate_response({
-            "sound_url": info_dict.get("requested_formats")[1].get("url"),
-            "video_url": info_dict.get("requested_formats")[0].get("url"),
-            "combined_url": info_dict.get("url")
-        })
+    logging.info(f"{info_dict=}")
+    return generate_response({
+        "sound_url": info_dict.get("requested_formats")[1].get("url"),
+        "video_url": info_dict.get("requested_formats")[0].get("url"),
+        "combined_url": info_dict.get("url")
+    })
 
 
 OPERATIONS = {
