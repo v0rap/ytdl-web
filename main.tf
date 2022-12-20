@@ -1,5 +1,11 @@
 terraform {
-  cloud {
+  required_providers {
+    aws = {  # AWS Provider for... well... AWS stuff
+      source = "hashicorp/aws"
+    }
+  }
+
+  cloud {  # Required to use app.terraform.com to deploy
     organization = "thvxl"
 
     workspaces {
