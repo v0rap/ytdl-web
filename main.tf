@@ -81,12 +81,12 @@ resource "aws_iam_role" "iam_ytdl" {  # Used to only allow access to lambda for 
 EOF
 }
 
-/*
+
 resource "aws_lambda_function" "api_lambda" {
-  image_uri     = "ghcr.io/v0rap/ytdl-web:latest"
+  image_uri     = "981644780922.dkr.ecr.eu-north-1.amazonaws.com/ytdl:v0.0.1"
   function_name = "ytdl"
   package_type  = "Image"
   role          = aws_iam_role.iam_ytdl.arn
   handler       = "app.handler"
   runtime       = "python3.9"
-} */
+}
