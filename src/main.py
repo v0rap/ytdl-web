@@ -8,11 +8,5 @@ logger.setLevel(logging.INFO)
 def handler(event, context):
     logging.info("Function was triggered!")
     return {
-        "statusCode": 200,
-        "headers": {
-            "Content-Type": "application/json"
-        },
-        "body": json.dumps({
-            "message": "Hello world!"
-        })
+        "message": "Hello world!"
     }
