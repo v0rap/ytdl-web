@@ -1,4 +1,4 @@
-name: "Terraform"
+name: "deploy-prod"
 
 on:
   push:
@@ -6,7 +6,35 @@ on:
       - main
   pull_request:
 
+env:
+  VERSION: "v0.0.2"
+
 jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - run: docker build --tag ytdl .
+
+      - name: Login to ECR
+        id: ecr
+        uses: jwalton/gh-ecr-login@v1
+        with:
+          access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: eu-north-1
+
+      - name: Push to ECR
+        run: |
+          docker tag ytdl ${{ steps.ecr.outputs.account }}.dkr.ecr.eu-north-1.amazonaws.com/ytdl:${{ env.VERSION }}
+          docker push ${{ steps.ecr.outputs.account }}.dkr.ecr.eu-north-1.amazonaws.com/ytdl:${{ env.VERSION }}
+
   terraform:
     name: "Terraform"
     runs-on: ubuntu-latest
@@ -69,4 +97,4 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false
+        run: terraform apply -auto-approve -input=false -var='version="${{ env.VERSION }}"'
