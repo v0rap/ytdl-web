@@ -68,7 +68,7 @@ def get_media_urls(body):
                 "detail": f"Invalid video ID: {video_id}"
             }, status_code=400)
 
-    with YoutubeDL({}) as ydl:
+    with YoutubeDL({"skip_download": True}) as ydl:
         info_dict = ydl.extract_info(f"https://youtu.be/{video_id}")
         logging.info(f"{info_dict=}")
         return generate_response({
