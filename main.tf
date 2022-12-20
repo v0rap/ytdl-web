@@ -13,8 +13,13 @@ terraform {
     }
   }
 }
+
+provider "aws" {
+  region = "eu-north-1"
+}
+
 resource "aws_iam_role" "iam_ytdl" {  # Used to only allow access to lambda for the function
-  name = "iam_ytdl"
+  name               = "iam_ytdl"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
