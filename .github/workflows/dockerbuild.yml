@@ -31,4 +31,4 @@ jobs:
       - name: Push to ECR
         run: |
           docker tag ytdl-api ${{ steps.ecr.outputs.account }}.dkr.ecr.eu-north-1.amazonaws.com/ytdl-api:${{ env.VERSION }}
-          docker push ${{ steps.ecr.outputs.account }}.dkr.ecr.us-east-1.amazonaws.com/ytdl-api:${{ env.VERSION }}
+          docker push ${{ steps.ecr.outputs.account }}.dkr.ecr.eu-north-1.amazonaws.com/ytdl-api:${{ env.VERSION }}
