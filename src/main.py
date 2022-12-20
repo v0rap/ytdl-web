@@ -84,7 +84,7 @@ OPERATIONS = {
 
 def handler(event, context):
     logging.info(f"{event=}")
-    operation = OPERATIONS.get(context.get("path").split("/")[-1])
+    operation = OPERATIONS.get(event.get("path").split("/")[-1])
     if not operation:
         return generate_response({"detail": "Operation not found"},
                                  status_code=404)
