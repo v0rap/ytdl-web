@@ -93,7 +93,7 @@ def handler(event, context):
                                  status_code=400)
 
     try:
-        return operation(json.loads(event.body))
+        return operation(json.loads(event["body"]))
     except json.JSONDecodeError:
         return generate_response({"detail": "Body not valid JSON"},
                                  status_code=400)
