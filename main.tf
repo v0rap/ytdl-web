@@ -124,6 +124,7 @@ resource "aws_lambda_function" "api_lambda" {
   function_name = "ytdl"
   package_type  = "Image"
   role          = aws_iam_role.iam_ytdl.arn
+  
 }
 
 resource "aws_api_gateway_deployment" "ytdl_api" {
