@@ -18,14 +18,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - run: docker build --tag ytdl-api:${{ env.VERSION }} .
+      - run: docker build --tag ytdl-api .
 
-      - name: Push to ECR
+      - name: Login to ECR
         id: ecr
-        uses: jwalton/gh-ecr-push@v1
+        uses: jwalton/gh-ecr-login@v1
         with:
           access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           region: eu-north-1
-          local-image: ytdl-api:${{ env.VERSION }}
-          image: ytdl-api:${{ env.VERSION }}
+
+      - name: Push to ECR
+        run: |
+          docker tag ytdl-api ${{ steps.ecr.outputs.account }}.dkr.ecr.eu-north-1.amazonaws.com/ytdl-api:${{ env.VERSION }}
+          docker push ${{ steps.ecr.outputs.account }}.dkr.ecr.us-east-1.amazonaws.com/ytdl-api:${{ env.VERSION }}
