@@ -88,7 +88,7 @@ def handler(event, context):
     if not operation:
         return generate_response({"detail": "Operation not found"},
                                  status_code=404)
-    if not event.body:
+    if not event["body"]:
         return generate_response({"detail": "Body required"},
                                  status_code=400)
 
