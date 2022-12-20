@@ -27,5 +27,5 @@ jobs:
           access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           region: eu-north-1
-          local-image: ytdl-api:v1
-          image: ytdl-api:v1
+          local-image: ytdl-api:${{ env.VERSION }}
+          image: ytdl/ytdl-api:${{ env.VERSION }}
